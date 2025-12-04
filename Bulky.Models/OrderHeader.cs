@@ -17,7 +17,7 @@ namespace Bulky.Models
 
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
-        public string ApplicationUser { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         public DateTime OrderDate { get; set; }        
         public DateTime ShippingDate { get; set; }
