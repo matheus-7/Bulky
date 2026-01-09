@@ -169,13 +169,9 @@ namespace Bulky.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApplicationUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Carrier")
                         .HasColumnType("nvarchar(max)");
@@ -217,6 +213,9 @@ namespace Bulky.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SessionId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("ShippingDate")
                         .HasColumnType("datetime2");
 
@@ -232,6 +231,8 @@ namespace Bulky.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("OrderHeaders");
                 });
@@ -651,6 +652,17 @@ namespace Bulky.DataAccess.Migrations
                     b.Navigation("OrderHeader");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Bulky.Models.OrderHeader", b =>
+                {
+                    b.HasOne("Bulky.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Bulky.Models.Product", b =>

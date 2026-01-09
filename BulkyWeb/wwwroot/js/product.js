@@ -1,5 +1,4 @@
-﻿
-var dataTable;
+﻿var dataTable;
 
 $(document).ready(function () {
     loadDataTable();
@@ -15,7 +14,7 @@ function loadDataTable() {
             }
         },
         columns: [
-            { data: 'title', width: '25%'},
+            { data: 'title', width: '25%' },
             { data: 'isbn', width: '15%' },
             { data: 'price', width: '10%' },
             { data: 'author', width: '15%' },
